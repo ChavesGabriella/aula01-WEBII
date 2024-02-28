@@ -13,10 +13,10 @@ class AlunoSeeder extends Seeder {
 
         $data = [
             [   
-                "nome" => "GABRIELLA SOEIRO CHAVES ALVES",
+                "nome" => "LÚCIA EDUARDA SILVA ALVES",
                 "cpf" => "000.000.000-01",
-                "email" => "gabriellasoeirooo@gmail.com", 
-                "password" => Hash::make('123gabriella123'), 
+                "email" => "lucia.alves@gmail.com", 
+                "password" => Hash::make('123lucia123'), 
                 "user_id" => 2,
                 "curso_id" => 2,
                 "turma_id" => 6,
