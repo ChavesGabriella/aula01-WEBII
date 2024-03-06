@@ -17,7 +17,7 @@ class CursoController extends Controller {
     }
 
     public function index() {
-        $data = $this->repository->selectAllWith(['eixo', 'nivel']);
+        $data = $this->repository->selectAllWith(['eixo', 'nivel']);//busca os cursos e mostra qual eixo e nivel ele pertence
         return $data;
     }
 
@@ -25,7 +25,7 @@ class CursoController extends Controller {
         // retorna, para o usuário, a view de criação de Curso
     }
 
-    public function store(Request $request) {
+    public function store(Request $request) { //pega os dados e coloca no objeto request
 
         $objEixo = (new EixoRepository())->findById($request->eixo_id);
         $objNivel = (new NivelRepository())->findById($request->nivel_id);
@@ -35,7 +35,7 @@ class CursoController extends Controller {
             $obj->nome = mb_strtoupper($request->nome, 'UTF-8');
             $obj->sigla = mb_strtoupper($request->sigla, 'UTF-8');
             $obj->total_horas = $request->horas;
-            $obj->eixo()->associate($objEixo);
+            $obj->eixo()->associate($objEixo);//associa o eixo com o obj eixo
             $obj->nivel()->associate($objNivel);
             $this->repository->save($obj);
             return "<h1>Store - OK!</h1>";

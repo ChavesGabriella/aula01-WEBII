@@ -12,7 +12,7 @@ class Curso extends Model {
     use SoftDeletes;
 
     public function eixo() {
-        return $this->belongsTo('\App\Models\Eixo'); 
+        return $this->belongsTo('\App\Models\Eixo'); //pegando chave estrangeira de eixo 
     }
 
     public function nivel() {

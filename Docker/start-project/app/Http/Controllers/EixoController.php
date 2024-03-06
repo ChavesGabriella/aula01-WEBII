@@ -17,10 +17,29 @@ class EixoController extends Controller
 
     public function index()
     {
-        $data = $this->repository->selectAll();
+        $data = $this->repository->selectAllWith(['curso']);
         return $data;
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public function create()
     {
         // retorna, para o usuário, a view de criação de Eixo
