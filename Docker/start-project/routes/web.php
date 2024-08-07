@@ -21,6 +21,9 @@ Route::get('/home', function () {
     return view('home');
 })->name('home');
 
+Route::get('report/eixo' , 'App\Http\Controllers\EixoController@report')->name('report');
+Route::get('graph/eixo' , 'App\Http\Controllers\EixoController@graph')->name('graph');
+
 Route::resource('/aluno', 'App\Http\Controllers\AlunoController');
 Route::resource('/categoria', 'App\Http\Controllers\CategoriaController');
 Route::resource('/comprovante', 'App\Http\Controllers\ComprovanteController');

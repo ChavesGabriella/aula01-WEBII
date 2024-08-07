@@ -1,4 +1,4 @@
-@extends('templates.main', ["title" => "Detalhes Eixo"])
+@extends('templates.main', ["title" => "Detalhes Eixo" , "header" => ""])
     <hr>
     <a href="{{route('eixo.index')}}">Voltar</a>
     <hr>

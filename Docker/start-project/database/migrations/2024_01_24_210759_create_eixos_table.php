@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('eixos', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
+            $table->text('descricao');
+            $table->string('url')->nullable();
             $table->softDeletes(); //add + um campo na tabela
             $table->timestamps();
         });
