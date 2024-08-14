@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id',
     ];
 
     /**
@@ -47,15 +48,5 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Role');
     }
 
-    public function curso() {
-        return $this->belongsTo('App\Models\Curso');
-    }
 
-    public function aluno() {
-        return $this->hasOne('App\Models\Aluno');
-    }
-
-    public function comprovante() {
-        return $this->hasManyTo('App\Models\Comprovante');
-    }
 }

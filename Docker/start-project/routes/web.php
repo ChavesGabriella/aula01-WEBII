@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,20 +18,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
+Route::resource('eixo', 'App\Http\Controllers\EixoController')->middleware(['auth']);
+Route::get('report/eixo', 'App\Http\Controllers\EixoController@report')->name('report');
+Route::get('graph/eixo', 'App\Http\Controllers\EixoController@graph')->name('graph');
 
-Route::get('report/eixo' , 'App\Http\Controllers\EixoController@report')->name('report');
-Route::get('graph/eixo' , 'App\Http\Controllers\EixoController@graph')->name('graph');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard'); //quando for acessar essa rota é obrigatório o usuário estar autenticado
 
-Route::resource('/aluno', 'App\Http\Controllers\AlunoController');
-Route::resource('/categoria', 'App\Http\Controllers\CategoriaController');
-Route::resource('/comprovante', 'App\Http\Controllers\ComprovanteController');
-Route::resource('/declaracao', 'App\Http\Controllers\DeclaracaoController');
-Route::resource('/curso', 'App\Http\Controllers\CursoController');
-Route::resource('/eixo', 'App\Http\Controllers\EixoController');
-Route::resource('/permission', 'App\Http\Controllers\PermissionController');
-Route::resource('/nivel', 'App\Http\Controllers\NivelController');
-Route::resource('/turma', 'App\Http\Controllers\TurmaController');
-Route::resource('/usuario', 'App\Http\Controllers\UserController');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';

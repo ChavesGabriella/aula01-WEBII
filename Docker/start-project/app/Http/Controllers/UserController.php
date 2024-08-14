@@ -18,7 +18,7 @@ class UserController extends Controller {
     }
 
     public function index() {
-        $data = $this->repository->selectAllWith(['role', 'curso']);
+        $data = $this->repository->selectAllWith(['role']);
         return $data;
     }
 
@@ -28,7 +28,6 @@ class UserController extends Controller {
 
     public function store(Request $request) {
         
-        $objCurso = (new CursoRepository())->findById($request->curso_id);
         $objRole = (new RoleRepository())->findById($request->role_id);
         
         if(isset($objCurso) && isset($objRole)) {
@@ -36,7 +35,6 @@ class UserController extends Controller {
             $obj->name = mb_strtoupper($request->nome, 'UTF-8');
             $obj->email = mb_strtolower($request->email, 'UTF-8');
             $obj->password = Hash::make($request->password); 
-            $obj->curso()->associate($objCurso);
             $obj->role()->associate($objRole);
             $this->repository->save($obj);
             return "<h1>Store - OK!</h1>";
@@ -58,14 +56,12 @@ class UserController extends Controller {
     public function update(Request $request, string $id) {
 
         $obj = $this->repository->findById($id);
-        $objCurso = (new CursoRepository())->findById($request->curso_id);
         $objRole = (new RoleRepository())->findById($request->role_id);
         
         if(isset($obj) && isset($objCurso) && isset($objRole)) {
             $obj->name = mb_strtoupper($request->nome, 'UTF-8');
             $obj->email = mb_strtolower($request->email, 'UTF-8');
             $obj->password = Hash::make($request->password); 
-            $obj->curso()->associate($objCurso);
             $obj->role()->associate($objRole);
             $this->repository->save($obj);
             return "<h1>Update - OK!</h1>";
