@@ -48,9 +48,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
         
-        PermissionController::loadPermissions(Auth::user()->role_id);
-
-
         return redirect(RouteServiceProvider::HOME);
     }
 }

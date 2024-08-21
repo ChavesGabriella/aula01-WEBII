@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\PermissionController;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\Permission;
 use App\Providers\RouteServiceProvider;
@@ -14,24 +13,15 @@ use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     */
-    public function create(): View
-    {
+
+    public function create(): View{
         return view('auth.login');
     }
 
-    /**
-     * Handle an incoming authentication request.
-     */
-    public function store(LoginRequest $request): RedirectResponse
-    {
+    public function store(LoginRequest $request): RedirectResponse {
         $request->authenticate();
 
         $request->session()->regenerate();
-
-        PermissionController::loadPermissions(Auth::user()->role_id);
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
