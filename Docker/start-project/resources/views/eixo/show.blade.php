@@ -10,4 +10,3 @@
         <li><b>CRIADO:</b>{{$eixo->create_at}}</li>
         <li><b>ALTERADO:</b>{{$eixo->updated_at}}</li>
     </ul>
-@endsection
